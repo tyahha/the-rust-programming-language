@@ -17,8 +17,18 @@ fn main() {
     takes_ownership(s);
     // error: value borrowed here after move
     // print!("After function call: {}\n", s);
+
+    let ss = String::from("world");
+    print!("Before function call: {}\n", ss);
+    let sss = takes_and_gives_back(ss);
+    print!("After function call: {}\n", sss);
 }
 
 fn takes_ownership(some_string: String) {
     println!("{}", some_string);
+}
+
+fn takes_and_gives_back(a_string: String) -> String {
+    println!("{}", a_string);
+    a_string
 }
