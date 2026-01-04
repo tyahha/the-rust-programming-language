@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 fn main() {
     // let num_x = 3;
     // let num_y = num_x;
@@ -44,6 +46,28 @@ fn main() {
         *e *= 2;
     }
     println!("v is {:?}", v);
+
+    let mut map = HashMap::new();
+    map.insert(String::from("hello"), 1);
+    map.insert(String::from("world"), 2);
+    println!("map is {:?}", map);
+
+    let teams = vec![String::from("Blue"), String::from("Yellow")];
+    let initial_scores = vec![10, 50];
+    let team_scores: Vec<_> = teams.iter().zip(initial_scores.iter()).collect();
+    println!("team_scores is {:?}", team_scores);
+
+    let first = String::from("first");
+    map.insert(first, 3);
+    println!("map is {:?}", map);
+    // error: cannot borrow `map` as mutable because it is also borrowed as immutable
+    // println!("first is {:?}", first);
+
+    map.insert(String::from("hello"), 100);
+    println!("map is {:?}", map);
+
+    map.entry(String::from("xxx")).or_insert(0);
+    println!("map is {:?}", map);
 }
 
 fn takes_ownership(some_string: String) {
