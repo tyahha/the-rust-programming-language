@@ -22,6 +22,28 @@ fn main() {
     print!("Before function call: {}\n", ss);
     let sss = takes_and_gives_back(ss);
     print!("After function call: {}\n", sss);
+
+    let mut v: Vec<i32> = Vec::new();
+    println!("v is {:?}", v);
+
+    v.push(1);
+    v.push(2);
+    println!("v is {:?}", v);
+
+    let val = v.get(0);
+    println!("val is {:?}", val);
+
+    let val = v.get(100);
+    println!("val is {:?}", val);
+
+    for e in &v {
+        println!("{}", e);
+    }
+
+    for e in &mut v {
+        *e *= 2;
+    }
+    println!("v is {:?}", v);
 }
 
 fn takes_ownership(some_string: String) {
