@@ -3,5 +3,5 @@
 members = [
     "hello_world",
     "hello_cargo",
-    "guessing_game", "sandbox", "rectangle",
+    "guessing_game", "sandbox", "rectangle", "minigrep",
 ]
