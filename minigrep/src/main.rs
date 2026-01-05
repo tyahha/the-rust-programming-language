@@ -6,7 +6,9 @@ fn main() {
         std::process::exit(1);
     });
 
-    run(config);
+    if let Err(e) = run(config) {
+        println!("Application error: {}", e);
+    }
 }
 
 struct Config {
@@ -34,6 +36,6 @@ fn run(config: Config) -> Result<(), Box<dyn std::error::Error>> {
     let contents = std::io::read_to_string(f)?;
 
     println!("With query {}", contents);
-    
+
     Ok(())
 }
