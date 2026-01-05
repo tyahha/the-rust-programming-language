@@ -26,12 +26,14 @@ impl Config {
     }
 }
 
-fn run(config: Config) {
+fn run(config: Config) -> Result<(), Box<dyn std::error::Error>> {
     println!("In file {}", config.filename);
 
-    let f = std::fs::File::open(config.filename).expect("File not found");
+    let f = std::fs::File::open(config.filename)?;
 
-    let contents = std::io::read_to_string(f).expect("Something went wrong reading the file");
+    let contents = std::io::read_to_string(f)?;
 
     println!("With query {}", contents);
+    
+    Ok(())
 }
