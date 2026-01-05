@@ -6,13 +6,7 @@ fn main() {
         std::process::exit(1);
     });
 
-    println!("In file {}", config.filename);
-
-    let f = std::fs::File::open(config.filename).expect("File not found");
-
-    let contents = std::io::read_to_string(f).expect("Something went wrong reading the file");
-
-    println!("With query {}", contents);
+    run(config);
 }
 
 struct Config {
@@ -30,4 +24,14 @@ impl Config {
         let filename = args[2].clone();
         Ok(Config { query, filename })
     }
+}
+
+fn run(config: Config) {
+    println!("In file {}", config.filename);
+
+    let f = std::fs::File::open(config.filename).expect("File not found");
+
+    let contents = std::io::read_to_string(f).expect("Something went wrong reading the file");
+
+    println!("With query {}", contents);
 }
