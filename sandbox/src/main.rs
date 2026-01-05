@@ -1,5 +1,20 @@
 use std::collections::HashMap;
 
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+
+    fn y(&self) -> &T {
+        &self.y
+    }
+}
+
 fn main() {
     // let num_x = 3;
     // let num_y = num_x;
@@ -68,6 +83,10 @@ fn main() {
 
     map.entry(String::from("xxx")).or_insert(0);
     println!("map is {:?}", map);
+
+    let p = Point { x: 5, y: 10 };
+    println!("p.x is {}", p.x());
+    println!("p.y is {}", p.y());
 }
 
 fn takes_ownership(some_string: String) {
