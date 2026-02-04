@@ -87,6 +87,10 @@ fn main() {
     let p = Point { x: 5, y: 10 };
     println!("p.x is {}", p.x());
     println!("p.y is {}", p.y());
+
+    let a = "aa";
+    let b = "bb";
+    println!("longest is {}", longest(a, b));
 }
 
 fn takes_ownership(some_string: String) {
@@ -96,4 +100,12 @@ fn takes_ownership(some_string: String) {
 fn takes_and_gives_back(a_string: String) -> String {
     println!("{}", a_string);
     a_string
+}
+
+fn longest<'a>(l: &'a str, r: &'a str) -> &'a str {
+    if l.len() > r.len() {
+        l
+    } else {
+        r
+    }
 }
