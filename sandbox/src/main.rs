@@ -93,6 +93,7 @@ fn main() {
     println!("longest is {}", longest(a, b));
 
     useCounter();
+    compare_value_with_ref();
 }
 
 fn takes_ownership(some_string: String) {
@@ -141,4 +142,12 @@ fn useCounter() {
     for x in counter {
         println!("count = {}", x);
     }
+}
+
+fn compare_value_with_ref() {
+    let x = 5;
+    let y = &x;
+    let z = 5;
+    println!("x == y({})", 5 == *y);
+    println!("x == z({})", x == z);
 }
