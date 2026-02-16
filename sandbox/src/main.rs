@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::ops::Deref;
 
 struct Point<T> {
     x: T,
@@ -92,8 +93,9 @@ fn main() {
     let b = "bb";
     println!("longest is {}", longest(a, b));
 
-    useCounter();
+    use_counter();
     compare_value_with_ref();
+    use_my_box();
 }
 
 fn takes_ownership(some_string: String) {
@@ -137,7 +139,7 @@ impl Iterator for Counter {
     }
 }
 
-fn useCounter() {
+fn use_counter() {
     let mut counter = Counter::new();
     for x in counter {
         println!("count = {}", x);
@@ -150,4 +152,23 @@ fn compare_value_with_ref() {
     let z = 5;
     println!("x == y({})", 5 == *y);
     println!("x == z({})", x == z);
+}
+
+struct MyBox<T>(T);
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+
+fn use_my_box() {
+    let b = MyBox::new(5);
+    println!("{}", *b);
 }
