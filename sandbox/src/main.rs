@@ -197,5 +197,9 @@ fn return_smart_pointer() -> CustomSmartPointer {
 
 fn test_custom_smart_pointer() {
     let c = return_smart_pointer();
-    println!("c.data = {}", c.data);
+    std::mem::drop(c);
+    println!("end of scope, test_custom_smart_pointer");
+
+    // error: use of moved value: `c`
+    // println!("use dropped pointer: {}", c.data)
 }
