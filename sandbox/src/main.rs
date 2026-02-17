@@ -171,4 +171,11 @@ impl<T> Deref for MyBox<T> {
 fn use_my_box() {
     let b = MyBox::new(5);
     println!("{}", *b);
+
+    let b = MyBox::new(String::from("hello"));
+    hello_my_box(&b);
+}
+
+fn hello_my_box(b: &str) {
+    println!("hello {}", b);
 }
