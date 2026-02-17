@@ -140,7 +140,7 @@ impl Iterator for Counter {
 }
 
 fn use_counter() {
-    let mut counter = Counter::new();
+    let counter = Counter::new();
     for x in counter {
         println!("count = {}", x);
     }
