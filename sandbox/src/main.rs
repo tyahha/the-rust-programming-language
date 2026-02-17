@@ -96,6 +96,7 @@ fn main() {
     use_counter();
     compare_value_with_ref();
     use_my_box();
+    test_custom_smart_pointer();
 }
 
 fn takes_ownership(some_string: String) {
@@ -178,4 +179,23 @@ fn use_my_box() {
 
 fn hello_my_box(b: &str) {
     println!("hello {}", b);
+}
+
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
+    }
+}
+
+fn return_smart_pointer() -> CustomSmartPointer {
+    CustomSmartPointer { data: String::from("my data") }
+}
+
+fn test_custom_smart_pointer() {
+    let c = return_smart_pointer();
+    println!("c.data = {}", c.data);
 }
