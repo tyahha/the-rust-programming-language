@@ -97,6 +97,7 @@ fn main() {
     compare_value_with_ref();
     use_my_box();
     test_custom_smart_pointer();
+    thread_test();
 }
 
 fn takes_ownership(some_string: String) {
@@ -202,4 +203,21 @@ fn test_custom_smart_pointer() {
 
     // error: use of moved value: `c`
     // println!("use dropped pointer: {}", c.data)
+}
+
+fn thread_test() {
+    use std::thread;
+    use std::time::Duration;
+
+    thread::spawn(|| {
+        for i in 0..5 {
+            println!("hi number {} from the spowned thread", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 0..5 {
+        println!("hi number {} from the main thread", i);
+        thread::sleep(Duration::from_millis(1));
+    }
 }
