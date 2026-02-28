@@ -99,6 +99,7 @@ fn main() {
     test_custom_smart_pointer();
     thread_test();
     channel_test();
+    channel_test2_multi_producer();
 }
 
 fn takes_ownership(some_string: String) {
@@ -235,4 +236,32 @@ fn channel_test() {
 
     let received = rx.recv().unwrap();
     println!("received: {}", received);
+}
+
+fn channel_test2_multi_producer() {
+    use std::sync::mpsc;
+    use std::thread;
+    use std::time::Duration;
+
+    let (tx, rx) = mpsc::channel();
+    let tx2 = tx.clone();
+    thread::spawn(move || {
+        let messages = vec!["hi", "hello", "hola"];
+        for msg in messages {
+            tx2.send(msg).unwrap();
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+
+    thread::spawn(move || {
+        let messages = vec!["howdy", "hey", "hola"];
+        for msg in messages {
+            tx.send(msg).unwrap();
+            thread::sleep(Duration::from_millis(100));
+        }
+    });
+
+    for msg in rx {
+        println!("received: {}", msg);
+    }
 }
