@@ -209,8 +209,8 @@ fn thread_test() {
     use std::thread;
     use std::time::Duration;
 
-    thread::spawn(|| {
-        for i in 0..5 {
+    let handle = thread::spawn(|| {
+        for i in 0..100 {
             println!("hi number {} from the spowned thread", i);
             thread::sleep(Duration::from_millis(1));
         }
@@ -220,4 +220,6 @@ fn thread_test() {
         println!("hi number {} from the main thread", i);
         thread::sleep(Duration::from_millis(1));
     }
+
+    handle.join().unwrap();
 }
