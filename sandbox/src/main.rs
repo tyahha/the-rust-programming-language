@@ -98,6 +98,7 @@ fn main() {
     use_my_box();
     test_custom_smart_pointer();
     thread_test();
+    channel_test();
 }
 
 fn takes_ownership(some_string: String) {
@@ -222,4 +223,16 @@ fn thread_test() {
     }
 
     handle.join().unwrap();
+}
+
+fn channel_test() {
+    use std::sync::mpsc;
+
+    let (tx, rx) = mpsc::channel();
+    std::thread::spawn(move || {
+        tx.send("hi").unwrap();
+    });
+
+    let received = rx.recv().unwrap();
+    println!("received: {}", received);
 }
